@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1"
+  },
+  "name": "placement-cell",
+  "version": "1.0.0",
+  "description": "Placement Cell",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NitishNaskar/Placement-Cell.git"
+  },
+  "author": "Nitish Ranjan Naskar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NitishNaskar/Placement-Cell/issues"
+  },
+  "homepage": "https://github.com/NitishNaskar/Placement-Cell#readme"
+}
