@@ -1,8 +1,15 @@
-const express=require("express");
-const router=express.Router();
-const login=require("../controllers/user");
+//Employee(user) Router
+const express=require('express');
+const router = express.Router();
 
-router.get("/sign-in",login.signInPage);
-router.get("/sign-up",login.signUpPage);
+const usersController = require('../controllers/user');
 
-module.exports=router;
+router.get("/sign-up", usersController.signUp);
+router.get("/sign-in", usersController.signIn);
+router.get("/sign-out", usersController.destroySession);
+
+router.post("/create-user", usersController.createUser);
+router.post("/create-session", usersController.createSession);
+
+//export router
+module.exports = router;

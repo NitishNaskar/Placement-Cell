@@ -1,12 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placement Cell | Home</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
 
+    <header class="p-3 bg-dark text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+    
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="#" class="nav-link px-2 text-white fs-3 fw-bold">Placement Cell</a></li>
+            </ul>
+    
+            <div class="text-end">
+              <a href="/users/sign-out" class="btn btn-outline-light me-2">Log out</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+    <div class="row align-items-md-stretch">
+        <div class="col-md-6">
+            <div class="h-100 p-5 rounded-3">
+                <div class="row">
+                    <h2 class="col-md-6">All Student Info</h2>
+                    <button type="button" class="btn btn-primary col-md-4 ms-4 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
+                    + Add student details
+                    </button>
+                </div>
+                <table class="table mt-3 border table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>College</th>
+                            <th>Status</th>
+                            <th>DSA</th>
+                            <th>Web</th>
+                            <th>React</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <% for(student of students){ %>
+                                <tr>
+                                    <th><%= student.s_id %></th>
+                                    <th><%= student.s_name %></th>
+                                    <th><%= student.s_college %></th>
+                                    <th><%= student.s_status %></th>
+                                    <th><%= student.dsa_score %></th>
+                                    <th><%= student.web_score %></th>
+                                    <th><%= student.react_score %></th>
+                                </tr> 
+                            <%} %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="h-100 p-5 rounded-3">
+                <div class="row">
+                    <h2 class="col-md-6">All Interview Session</h2>
+                    <button type="button" class="btn btn-primary col-md-4 ms-4 mb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop-2" onclick="getallstudentname()">
+                    + Schedule a interview
+                    </button>
+                </div>
+                <table class="table mt-3 border table-bordered text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>Company</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <% for(interview of interviews){ %>
+                                <tr>
+                                    <th><%= interview.i_date %></th>
+                                    <th><%= interview.i_company %></th>
+                                    <th><%= interview.s_name %></th>
+                                    <th><%= interview.i_result %></th>
+                                </tr> 
+                            <%} %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="/download" style="margin-left: 46%;">Download CSV</a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add new student record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/student/create" class="login-form" method="post">
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control rounded-left" placeholder="Student Id" name="sid"
+                                required>
+                        </div>
+                        <div class="form-group d-flex mt-3">
+                            <input type="text" class="form-control rounded-left" placeholder="Full Name" name="name"
+                                required>
+                        </div>
+                        <div class="form-group d-flex mt-3">
+                            <input type="text" class="form-control rounded-left" placeholder="College Name"
+                                name="college" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group d-flex mt-3 col-md-6">
+                                <input type="text" class="form-control rounded-left" placeholder="DSA Score" name="dsa">
+                            </div>
+
+                            <div class="form-group d-flex mt-3 col-md-6">
+                                <input type="text" class="form-control rounded-left" placeholder="Web Score" name="web">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group d-flex mt-3 col-md-6">
+                                <input type="text" class="form-control rounded-left" placeholder="React Score" name="react">
+                            </div>
+
+                            <div class="form-group d-flex mt-3 col-md-6">
+                                <input type="text" class="form-control rounded-left" placeholder="Status" name="status">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="form-control btn btn-primary rounded submit px-3">Add New</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="staticBackdrop-2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel-2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel-2">Add new interview record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="interview/create" class="login-form" method="post">
+                        <div class="form-group mt-3">
+                            <input type="date" class="form-control rounded-left" placeholder="Select Date" name="date" required>
+                        </div>
+                        <div class="form-group d-flex mt-3">
+                            <input type="text" class="form-control rounded-left" placeholder="Company Name" name="company" required>
+                        </div>
+                        <div class="form-group d-flex mt-3">
+                            <select class="form-select rounded-left" id="all-student" placeholder="Select a status" name="name" required></select>
+                        </div>
+                        <div class="form-group d-flex mt-3">
+                            <select class="form-select rounded-left" placeholder="Select a status" name="status" required>
+                                <option value="Pending">Pending</option>
+                                <option value="Qualify">Qualify</option>
+                                <option value="Unqualify">Un-Qualify</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="submit" class="form-control btn btn-primary rounded submit px-3">Add New</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/js/home.js"></script> 
 </body>
+
 </html>
